@@ -54,3 +54,49 @@
         year int NOT NULL,
         CONSTRAINT FK_teaches FOREIGN KEY (course_id, sec_id, semester, year) REFERENCES section(course_id, sec_id, semester, year)
         );
+-- Table 7 student
+        CREATE TABLE student(
+        ID int NOT NULL PRIMARY KEY,
+        name varchar(30) NOT NULL,
+        dept_name varchar(30) NOT NULL,
+        tot_cred int,
+        CONSTRAINT FOREIGN KEY (dept_name) REFERENCES department(dept_name)
+        );
+     
+     -- Table 8 takes
+     CREATE TABLE takes(
+     ID int NOT NULL,
+     course_id varchar(10) NOT NULL,
+     sec_id varchar(10) NOT NULL,
+     semester int NOT NULL,
+     year int NOT NULL,
+     grade varchar(2),
+     CONSTRAINT FOREIGN KEY (ID) REFERENCES student(ID),
+     CONSTRAINT FOREIGN KEY (course_id, sec_id, semester, year) REFERENCES section(course_id, sec_id, semester, year)
+     );
+     
+     -- Table 9 advisor
+      CREATE TABLE advisor(
+      s_id int NOT NULL,
+      i_id int NOT NULL,
+      CONSTRAINT FOREIGN KEY (s_id) REFERENCES student(ID),
+      CONSTRAINT FOREIGN KEY (i_id) REFERENCES instructor(ID)
+      );
+      
+    -- Table 10 time_slot
+     CREATE TABLE time_slot(
+     time_slot_id int NOT NULL,
+     day varchar(10) NOT NULL,
+     start_time time NOT NULL,
+     end_time time NOT NULL,
+     CONSTRAINT PK_time_slot PRIMARY KEY (time_slot_id, day, start_time)
+     );
+    
+  -- Table 11 prereq
+        CREATE TABLE prereq(
+        course_id varchar(10) NOT NULL,
+        prereq_id varchar(10) NOT NULL,
+        CONSTRAINT FOREIGN KEY (course_id) REFERENCES course(course_id),
+        CONSTRAINT FOREIGN KEY (prereq_id) REFERENCES course(course_id)
+        );
+     

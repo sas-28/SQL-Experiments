@@ -113,9 +113,39 @@
     -> ('Mathematics', 'Building No 6', 200000)
     -> ('IT','Building No 1', 600000);
     
+    INSERT INTO course VALUES
+    -> ('ITPC25', 'Database Systems', 'IT',5),
+    -> ('ITPC27','Software Engnireeing','IT',4),
+    -> ('ITPC29','Computer Organisation','IT',4);
+    
+    INSERT INTO course VALUES
+    -> ('CSPC25', 'Database Systems', 'Computer Engg',5),
+    -> ('CSPC27','Software Engnireeing','Computer Engg',4),
+    -> ('CSPC29','Computer Organisation','Computer Engg',4);
+    
     INSERT INTO instructor VALUES
     -> (1, 'S.K. Jain', 'IT', 100000),
     -> (2, 'J.K. Chabbra', 'IT', 100000);
+    
+    INSERT INTO classroom VALUES
+    -> ('Lecture Hall Complex','LHC102', 120),
+    -> ('Lecture Hall Complex','LHC101', 120),
+    -> ('Lecture Hall Complex','LHC202', 120),
+    -> ('Lecture Hall Complex','LHC201', 120),
+    -> ('A-Block','A100',120),
+    -> ('A-Block','A101',120);
+    
+    INSERT INTO student VALUES
+    -> (11913102, 'Sahil Shende','IT', 76);
+    
+    INSERT INTO section VALUES
+    -> ('ITPC25','IT-B',3,2,"Lecture Theatre Complex",'LHC101',1),
+    -> ('ITPC27','IT-B',1,1,"A-Block",'A100',1);
+    
+    INSERT INTO teaches VALUES
+    -> (1, 'ITPC25','IT-B',3,2),
+    -> (2,'ITPC27','IT-B',1,1);
+    
     
 -- Queries
 
@@ -138,11 +168,25 @@
       
   -- 5. Change name of the building "Lecture Hall Complex" to "Lecture Theatre Complex".
   
+        UPDATE classroom
+        SET building='Lecture Theatre Complex'
+        WHERE building='Lecture Hall Complex';
 
+-- 6. Find name of the department of a student with ID _____. (Take a valid ID value of a student) 
 
+        SELECT name, dept_name FROM student WHERE ID=11913102;
 
-
-
-
-
-
+-- 7. Retrieve names of all instructors along with the Course IDs of the courses they teach. 
+        
+        SELECT a.name, b.course_id FROM
+        instructor a INNER JOIN teaches b
+        ON a.ID=b.ID;
+  
+  -- 8. Retrieve Course ID, semester, year and title of each course being taught by "Computer Engg." department.
+  
+        SELECT a.course_id, a.semester, a.year, b.title
+        FROM section a INNER JOIN course b
+        ON a.course_id=b.course_id
+        WHERE b.dept_name='Computer Engg';
+        
+  -- 9. 

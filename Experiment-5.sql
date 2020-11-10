@@ -123,9 +123,19 @@
     -> ('CSPC27','Software Engnireeing','Computer Engg',4),
     -> ('CSPC29','Computer Organisation','Computer Engg',4);
     
+    INSERT INTO course VALUES
+    -> ('ITIR13','Discipline Engineering','IT',3),
+    -> ('ITPC10','Digital System Design','IT',3);
+    
     INSERT INTO instructor VALUES
     -> (1, 'S.K. Jain', 'IT', 100000),
     -> (2, 'J.K. Chabbra', 'IT', 100000);
+    
+    INSERT INTO instructor VALUES
+    -> (3, 'M.K. Verma', 'Computer Engg', 50000),
+    -> (4, 'Mayank Dave','Computer Engg', 70000),
+    -> (5, 'Priyanka Alhawat','Computer Engg', 80000),
+    -> (6, 'B.K. Mars','Computer Engg', 100000);
     
     INSERT INTO classroom VALUES
     -> ('Lecture Hall Complex','LHC102', 120),
@@ -189,4 +199,23 @@
         ON a.course_id=b.course_id
         WHERE b.dept_name='Computer Engg';
         
-  -- 9. 
+  -- 9. Compute monthly salary of all instructors and display it as 'monthly salary' attribute in place of attribute 'salary'. 
+        SELECT SUM(salary) AS 'monthly salary' FROM instructor;
+        
+  -- 10. Retrieve names of all departments housed in the building named _______. (Consider a valid Building name)
+        SELECT * FROM department
+        WHERE building='Building No 6';
+        
+   -- 11. Find the names of all instructors belonging to Computer Engg. department who have salary greater than Rs. 70,000.
+   
+         SELECT name, salary
+         FROM instructor
+         WHERE dept_name='Computer Engg' AND salary > 70000;
+         
+   -- 12. Find titles of the courses that have credits 3 and offered by the department IT. 
+   
+        SELECT title, credits FROM  courses
+        WHERE dept_name='IT' AND credits=3;
+        
+   -- 13. 
+   

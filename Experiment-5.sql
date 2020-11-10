@@ -99,4 +99,50 @@
         CONSTRAINT FOREIGN KEY (course_id) REFERENCES course(course_id),
         CONSTRAINT FOREIGN KEY (prereq_id) REFERENCES course(course_id)
         );
-     
+        
+    -- Data
+    
+    INSERT INTO department VALUES
+    -> ('Computer Engg', 'Building No. 1', 500000),
+    -> ('Civil Engg', 'Building No 2', 500000),
+    -> ('Mechanical Engg', 'Building No 3', 500000),
+    -> ('Electrical Engg', 'Building No 4', 500000),
+    -> ('Electronics & Communication', 'Building No 5', 600000),
+    -> ('Physics' , 'Building No 6', 400000),
+    -> ('Chemistry', 'Building No 6', 300000),
+    -> ('Mathematics', 'Building No 6', 200000)
+    -> ('IT','Building No 1', 600000);
+    
+    INSERT INTO instructor VALUES
+    -> (1, 'S.K. Jain', 'IT', 100000),
+    -> (2, 'J.K. Chabbra', 'IT', 100000);
+    
+-- Queries
+
+    -- 1. Increase Salary by 20 percent of all instructors who are working in Department IT
+        UPDATE instructor
+        SET salary=salary+salary*(0.2)
+        WHERE dept_name='IT';
+
+    -- 2. Retrieve names of all instructors along with their department names. 
+        SELECT name, dept_name FROM instructor;
+        
+   -- 3. . Retrieve names of all instructors along with their department names and building names in which the departments are housed.
+        SELECT a.name, a.dept_name, b.building
+        FROM instructor a INNER JOIN department b
+        ON a.dept_name=b.dept_name;
+    
+  -- 4. Retrieve names of all departments along with names of the buildings in which they are situated
+        SELECT dept_name, building
+        FROM department;
+      
+  -- 5. Change name of the building "Lecture Hall Complex" to "Lecture Theatre Complex".
+  
+
+
+
+
+
+
+
+

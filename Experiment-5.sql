@@ -127,6 +127,11 @@
     -> ('ITIR13','Discipline Engineering','IT',3),
     -> ('ITPC10','Digital System Design','IT',3);
     
+    INSERT INTO course VALUES
+    ->  ('ITPC20','Operating System','IT',5),
+    -> ('ITPC22','Communication System','IT',4),
+    -> ('ITPC24','Computer Networks','IT',4);
+    
     INSERT INTO instructor VALUES
     -> (1, 'S.K. Jain', 'IT', 100000),
     -> (2, 'J.K. Chabbra', 'IT', 100000);
@@ -152,6 +157,14 @@
     -> ('ITPC25','IT-B',3,2,"Lecture Theatre Complex",'LHC101',1),
     -> ('ITPC27','IT-B',1,1,"A-Block",'A100',1);
     
+    INSERT INTO section VALUES
+    -> ('CSPC31', 'CS-B',5,3,'Lecture Theatre Complex','LHC102',4);
+    
+    INSERT INTO section VALUES
+    -> ('ITPC20','IT-B',4,2,'Lecture Theatre Complex','LHC201',3),
+    -> ('ITPC22','IT-B',4,2,'Lecture Theatre Complex','LHC201',3),
+    -> ('ITPC24','IT-B',4,2,'Lecture Theatre Complex','LHC201',3);
+
     INSERT INTO teaches VALUES
     -> (1, 'ITPC25','IT-B',3,2),
     -> (2,'ITPC27','IT-B',1,1);
@@ -217,5 +230,31 @@
         SELECT title, credits FROM  courses
         WHERE dept_name='IT' AND credits=3;
         
-   -- 13. 
+   -- 13. Find course names and their credits running in semester 4.
+   
+        SELECT title, credits
+        FROM course
+        WHERE course_id IN(
+        SELECT course_id
+        FROM section
+        WHERE semester=4)
+        ;
+        
+    -- 14. List classes as year and semester wise engaged in room no. LHC-102. 
+    
+        SELECT semester, year
+        FROM section
+        WHERE room_no='LHC102'
+        GROUP BY year
+        ORDER BY year, semester ASC ;
+        
+    -- 15. List classes as year, semester and section wise engaged in room no. LHC-101. 
+    
+        SELECT semester, year
+        FROM section
+        WHERE room_no='LHC101'
+        GROUP BY year
+        ORDER BY year, semester ASC ;
+   
+   -- 16. 
    

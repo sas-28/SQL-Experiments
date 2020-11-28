@@ -248,13 +248,32 @@
         GROUP BY year
         ORDER BY year, semester ASC ;
         
-    -- 15. List classes as year, semester and section wise engaged in room no. LHC-101. 
+    -- 15. List classes as year, semester and section wise engaged in room no. LHC-102. 
     
         SELECT semester, year
         FROM section
-        WHERE room_no='LHC101'
+        WHERE room_no='LHC102'
         GROUP BY year
         ORDER BY year, semester ASC ;
    
-   -- 16. 
+   -- 16. List classes as year, semester and section wise engaged in room no. LHC-101.
+        
+        SELECT year, semester, sec_id
+        FROM section
+        WHERE room_no='LHC101';
+        
+   -- 17. Retrieve list of room number & time slot where all classes of Computer Engg.. Semester 7th are scheduled.
    
+        SELECT a.room_no, b.start_time, b.end_time
+        FROM section a INNER JOIN time_slot b
+        ON a.time_slot_id=b.time_slot_id
+        WHERE course_id IN
+          (SELECT course_id
+           FROM course
+           WHERE dept_name='Computer Engg'
+           )
+        GROUP BY b.start_time;
+   
+   -- 18. Retrieve Course titles taught by instructor _______. (Take a valid instructor ID or name)
+   -- 19. For all instructors in the university who have taught some course, display their names along with their department names.
+   -- 20. Find the names of all instructors who have a higher salary than some instructor in "Computer Engg." department.

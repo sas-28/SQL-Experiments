@@ -275,5 +275,27 @@
         GROUP BY b.start_time;
    
    -- 18. Retrieve Course titles taught by instructor _______. (Take a valid instructor ID or name)
+        SELECT title FROM course
+        WHERE course_id IN
+            (
+             SELECT course_id
+             FROM teaches
+             WHERE id IN
+                (
+                 SELECT id
+                 FROM instructor
+                 WHERE name='S.K. Jain'
+                )
+            );
    -- 19. For all instructors in the university who have taught some course, display their names along with their department names.
+         SELECT name, dept_name
+         FROM instructor
+         WHERE id IN
+           (
+            SELECT id FROM teaches
+           );
    -- 20. Find the names of all instructors who have a higher salary than some instructor in "Computer Engg." department.
+        -- second instructor B.K. Mars
+        SELECT name, salary
+        FROM instructor
+        WHERE salary > (SELECT salary FROM instructor WHERE name='B.K. Mars');
